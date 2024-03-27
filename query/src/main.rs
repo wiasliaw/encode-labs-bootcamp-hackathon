@@ -29,10 +29,10 @@ async fn main() -> Result<()> {
 
     let swap_logs = client.get_logs(&swap_filter).await?;
     for log in swap_logs.iter() {
-        // let amount0 = I256::from_raw(U256::from_big_endian(&log.data[0..32]));
+        let amount0 = I256::from_raw(U256::from_big_endian(&log.data[0..32]));
         let amount1 = I256::from_raw(U256::from_big_endian(&log.data[32..64]));
         let sqrt_price_x96 = U256::from_big_endian(&log.data[64..96]);
-        // println!("swap {:?}, {:?}, {:?}", amount0, amount1, sqrt_price_x96);
+        println!("swap {:?}, {:?}, {:?}", amount0, amount1, sqrt_price_x96);
 
         let (_sign, amount1_abs) = amount1.into_sign_and_abs();
         pv.push(amount1_abs.full_mul(sqrt_price_x96));

@@ -1,18 +1,26 @@
 #![no_main]
-#![no_std]
 
+use ethers_core::types::{U256, U512};
 use risc0_zkvm::guest::env;
+use dummy::Dummy;
 
 risc0_zkvm::guest::entry!(main);
 
 fn main() {
-    // TODO: Implement your guest code here
-
     // read the input
-    let input: u32 = env::read();
+    let len: usize = env::read();
+    let mut sum_pv = U512::zero();
+    let mut total_volume = U256::zero();
 
-    // TODO: do something with the input
+    for _i in 0..len {
+        let value: Dummy = env::read();
+        sum_pv = sum_pv.checked_add(value.sqrt_price.full_mul(value.volume)).unwrap();
+        total_volume = total_volume.checked_add(value.volume).unwrap();
+    }
+
+    // calculate vwap
+    let vwap = sum_pv.checked_div(U512::from(total_volume)).expect("overflow");
 
     // write public output to the journal
-    env::commit(&input);
+    env::commit(&vwap);
 }

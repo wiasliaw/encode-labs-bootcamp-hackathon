@@ -6,5 +6,7 @@ version = "0.1.0"
 [workspace]
 
 [dependencies]
-# If you want to try (experimental) std support, add `features = [ "std" ]` to risc0-zkvm
-risc0-zkvm = {version = "0.21.0", default-features = false}
+dummy = {path = "../../dummy"}
+ethers-core = "2.0.14"
+# use experimental feature of std support
+risc0-zkvm = {version = "0.21.0", default-features = false, features = ["std"]}

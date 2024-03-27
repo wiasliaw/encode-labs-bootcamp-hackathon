@@ -13,8 +13,8 @@ event Swap(
     int256 amount0,            // data[0..32]
     int256 amount1,            // data[32..64]
     uint160 sqrtPriceX96,      // data[64..96]
-    uint128 liquidity,         // data[96..128]
-    int24 tick                 //
+    uint128 liquidity,
+    int24 tick
 );
 ```
 

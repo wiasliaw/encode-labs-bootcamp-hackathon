@@ -1,5 +1,5 @@
 [workspace]
-members = ["query", "methods", "host"]
+members = ["query", "methods", "host", "dummy"]
 resolver = "2"
 
 [profile.dev]
